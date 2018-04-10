@@ -137,10 +137,16 @@ object microfonoGibson {
 object microfonoDiMarzio {
 	method valor()=800
 }
+object microfonoDrDre{
+	method valor()=5000
+}
 //Estuches
 object estucheFlexible{
 	method esFragil()=true
 }
 object estucheRigido{
 	method esFragil()=false
+}
+object estucheMediano{
+	method esFragil()=true
 }
