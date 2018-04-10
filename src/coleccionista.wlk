@@ -66,9 +66,22 @@
 
 // PUNTO 1: COLECCIONES
 object coleccionista {
-	
+	var coleccion=#{}
 	//TODO: Completar la implementacion de este objeto		
-
+    method agregarElemento(unElemento){
+    	coleccion.add(unElemento)
+    }
+    method quitarElemento(unElemento){
+    	coleccion.remove(unElemento)
+    }
+    method objetosFragiles()=coleccion.filter({objeto=>objeto.esFragil()})
+    method objetoFragilMasCaro()=self.objetosFragiles().max({objeto=>objeto.valor()})
+    method valorEnObjetosFragiles()=self.objetosFragiles().sum({objeto=>objeto.valor()})
+    method objetosDeCategoria(unaCategoria)=coleccion.filter({objeto=>objeto.categoria()==unaCategoria})
+    method valorEnCategoria(unaCategoria)=self.objetosDeCategoria(unaCategoria).sum({objeto=>objeto.valor()})
+    method existeElementoDe(unaCategoria)=coleccion.any({objeto=>objeto.categoria()==unaCategoria})
+    method categorias()=coleccion.map({objeto=>objeto.categoria()}).asSet()
+    method todosValiosos()=coleccion.all({objeto=>objeto.valor()>600})
 }
 
 
@@ -108,8 +121,26 @@ object musica {
 
 // PUNTO 2: POLIMORFISMO. 
 object guitarraElectrica {
+	var property estuche = estucheRigido
+	var property microfono = microfonoGibson
    //TODO Completar la implementacion de este objeto
+   method esFragil()= estuche.esFragil()
+   method valor()= 10000 + microfono.valor()
+   method categoria()= musica
 }
 
 //TODO: agregar los objetos que falten! Si no agregaste ninguno repensá tu solución; pista: el punto se llama "POLIMORFISMO" 
-
+//Microfonos
+object microfonoGibson {
+	method valor()=1000
+}
+object microfonoDiMarzio {
+	method valor()=800
+}
+//Estuches
+object estucheFlexible{
+	method esFragil()=true
+}
+object estucheRigido{
+	method esFragil()=false
+}
